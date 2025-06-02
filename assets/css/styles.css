@@ -1,0 +1,585 @@
+:root {
+  --wow-gold: #f0c850;
+  --wow-gold-light: #f8e4a0;
+  --wow-gold-dark: #c9a22c;
+  --wow-stone: #4a4a4a;
+  --wow-dark: #1a1815;
+  --wow-text: #e0d8c0;
+  --wow-red: #c41f3b; /* Horde Red */
+  --wow-blue: #0070dd; /* Alliance Blue */
+  --wow-green: #28a745; /* Nature Green */
+  --wow-purple: #6f42c1; /* Arcane Purple */
+  --wow-teal: #20c997; /* Frost Teal */
+  --wow-orange: #f5a623; /* Quest Orange */
+  --font-title: "Cinzel", serif;
+  --font-body: "MedievalSharp", cursive, sans-serif;
+}
+
+body {
+  background-color: var(--wow-dark);
+  background-image: linear-gradient(rgba(26, 24, 21, 0.7), rgba(26, 24, 21, 0.9)), url("../images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--wow-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 1rem 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.wow-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1.5s ease-out;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.wow-title {
+  font-family: var(--font-title);
+  color: var(--wow-gold);
+  font-weight: 800;
+  font-size: 2.8rem;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px rgba(240, 200, 80, 0.5), 2px 2px 5px var(--wow-dark);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.wow-title::before,
+.wow-title::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--wow-gold), transparent);
+  width: 120%;
+  left: -10%;
+}
+
+.wow-title::before {
+  top: -10px;
+}
+
+.wow-title::after {
+  bottom: -10px;
+}
+
+.wow-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #d4cba9;
+  max-width: 800px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  animation: fadeIn 2s ease-out;
+}
+
+/* 控制台容器 */
+.console-container {
+  background-color: rgba(30, 28, 24, 0.85);
+  border: 2px solid var(--wow-gold);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(240, 200, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+  margin-bottom: 1.5rem;
+}
+
+.console-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--wow-gold-dark), var(--wow-gold), var(--wow-gold-dark));
+  opacity: 0.8;
+}
+
+/* 九宫格菜单布局 */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  aspect-ratio: 3 / 2; /* 设置整体网格的宽高比 */
+}
+
+.menu-item {
+  position: relative;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.menu-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.menu-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.menu-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.menu-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.menu-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.menu-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.menu-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.menu-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.menu-item:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+/* 菜单按钮 */
+.menu-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 2rem;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--wow-dark);
+  background: linear-gradient(to bottom, var(--wow-gold-light), var(--wow-gold));
+  border: 2px solid var(--wow-gold-dark);
+  border-radius: 12px;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 50%);
+  z-index: 1;
+}
+
+.menu-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 图标样式 */
+.menu-icon-wrapper {
+  width: 65px;
+  height: 65px;
+  margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.menu-icon {
+  font-size: 2.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.menu-text {
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+  font-size: 1.4rem;
+}
+
+/* 状态徽章 */
+.status-badge {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--wow-gold);
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--wow-gold);
+  font-family: var(--font-body);
+  z-index: 2;
+}
+
+/* 音乐控制按钮 */
+.music-control {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.music-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--wow-gold);
+  color: var(--wow-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(240, 200, 80, 0.3);
+  font-size: 1.3rem;
+}
+
+.music-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* 音乐播放提示 */
+.music-prompt {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--wow-gold);
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--wow-gold);
+  font-size: 0.9rem;
+  z-index: 1000;
+  animation: fadeIn 1s ease-out;
+  box-shadow: 0 0 15px rgba(240, 200, 80, 0.3);
+  display: none;
+}
+
+.music-prompt.show {
+  display: block;
+}
+
+/* 按钮变体 */
+.btn-gm {
+  background: linear-gradient(to bottom, var(--wow-gold-light), var(--wow-gold));
+  border-color: var(--wow-gold-dark);
+}
+
+.btn-gm:hover {
+  background: linear-gradient(to bottom, var(--wow-gold), var(--wow-gold-dark));
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-bag {
+  background: linear-gradient(to bottom, #5e9de6, var(--wow-blue));
+  border-color: #0056b3;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-bag:hover {
+  background: linear-gradient(to bottom, var(--wow-blue), #0056b3);
+}
+
+.btn-account {
+  background: linear-gradient(to bottom, #4cd964, var(--wow-green));
+  border-color: #1c7430;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-account:hover {
+  background: linear-gradient(to bottom, var(--wow-green), #1c7430);
+}
+
+.btn-mail {
+  background: linear-gradient(to bottom, #9b6dff, var(--wow-purple));
+  border-color: #4a2a83;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-mail:hover {
+  background: linear-gradient(to bottom, var(--wow-purple), #4a2a83);
+}
+
+.btn-mail-system {
+  background: linear-gradient(to bottom, #b088ff, #8a5eff);
+  border-color: #6a3aff;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-mail-system:hover {
+  background: linear-gradient(to bottom, #8a5eff, #6a3aff);
+}
+
+.btn-item {
+  background: linear-gradient(to bottom, #4ce0c2, var(--wow-teal));
+  border-color: #158d6a;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-item:hover {
+  background: linear-gradient(to bottom, var(--wow-teal), #158d6a);
+}
+
+.btn-drop {
+  background: linear-gradient(to bottom, #ffd166, #ffb347);
+  border-color: #e69500;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-drop:hover {
+  background: linear-gradient(to bottom, #ffb347, #e69500);
+}
+
+.btn-creature {
+  background: linear-gradient(to bottom, #ff6b6b, var(--wow-red));
+  border-color: #8b1024;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-creature:hover {
+  background: linear-gradient(to bottom, var(--wow-red), #8b1024);
+}
+
+.btn-quest {
+  background: linear-gradient(to bottom, #f5a623, #d08e00);
+  border-color: #a06c00;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn-quest:hover {
+  background: linear-gradient(to bottom, #d08e00, #a06c00);
+}
+
+/* 页脚 */
+.footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  color: rgba(224, 216, 192, 0.7);
+  width: 100%;
+  max-width: 1200px;
+  border-top: 1px solid rgba(240, 200, 80, 0.3);
+}
+
+.attribution {
+  margin-top: 10px;
+  padding: 5px 0;
+  color: var(--wow-gold);
+  font-weight: bold;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(240, 200, 80, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(240, 200, 80, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(240, 200, 80, 0.5);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+  .menu-grid {
+    aspect-ratio: auto;
+    gap: 1.2rem;
+  }
+
+  .menu-btn {
+    padding: 1.2rem 1.8rem;
+    font-size: 1.3rem;
+  }
+
+  .menu-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .menu-icon {
+    font-size: 2rem;
+  }
+
+  .menu-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .console-container {
+    padding: 1.5rem;
+  }
+
+  .menu-grid {
+    gap: 1rem;
+  }
+
+  .menu-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .menu-icon-wrapper {
+    width: 55px;
+    height: 55px;
+    margin-right: 1.2rem;
+  }
+
+  .menu-icon {
+    font-size: 1.8rem;
+  }
+
+  .menu-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .console-container {
+    padding: 1.2rem;
+  }
+
+  .wow-title {
+    font-size: 2.2rem;
+  }
+
+  .wow-subtitle {
+    font-size: 1rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  .menu-btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+    height: 100px;
+  }
+
+  .menu-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+  }
+
+  .menu-icon {
+    font-size: 1.6rem;
+  }
+
+  .menu-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .console-container {
+    padding: 1rem;
+  }
+
+  .wow-title {
+    font-size: 1.8rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .menu-btn {
+    height: 90px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  .menu-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    margin-right: 0.8rem;
+  }
+
+  .menu-icon {
+    font-size: 1.4rem;
+  }
+
+  .menu-text {
+    font-size: 1rem;
+  }
+}

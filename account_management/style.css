@@ -1,0 +1,70 @@
+/* Account Management Specific Styles */
+
+.account-table {
+    font-size: 0.9rem;
+}
+
+.account-actions .btn {
+    margin-right: 5px; /* Add some spacing between action buttons */
+    margin-bottom: 5px; /* Add spacing for wrapping on small screens */
+}
+
+/* Add specific styles if needed */
+
+/* Online Count Display */
+.online-count {
+    color: red;
+    font-weight: bold;
+    font-size: 0.95rem; /* Slightly smaller than h4 */
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-bottom: 0; /* Remove default bottom margin if needed */
+}
+
+/* Adjust link colors for dark theme */
+.page-link {
+    background-color: #3a3f45;
+    border-color: #444;
+    color: #f0c850; /* Accent color for links */
+}
+
+.page-link:hover {
+    background-color: #4a4f55;
+    border-color: #555;
+    color: #fff;
+}
+
+.page-item.active .page-link {
+    background-color: #f0c850;
+    border-color: #f0c850;
+    color: #23272b; /* Dark text on active background */
+}
+
+.page-item.disabled .page-link {
+    background-color: #2c2f33;
+    border-color: #444;
+    color: #6c757d; /* Muted color for disabled */
+}
+
+/* Add styles for gold, silver, copper display */
+.money-gold {
+    color: #FFD700; /* Gold color */
+    font-weight: bold; /* Optional: make gold bold */
+}
+
+.money-silver {
+    color: #C0C0C0; /* Silver color */
+}
+
+.money-copper {
+    color: #B87333; /* Copper color */
+}
+
+/* Add some spacing between money units if needed */
+.money-gold,
+.money-silver,
+.money-copper {
+    margin-right: 4px; /* Adjust as needed */
+} 
