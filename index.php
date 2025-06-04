@@ -21,16 +21,50 @@ if (!file_exists($configFilePath)) {
     <title>艾泽拉斯控制台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="魔兽世界私服管理控制台">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- DNS预解析 -->
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- 预连接重要资源 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=MedievalSharp&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 优先加载关键CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- 异步加载外部CSS -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=MedievalSharp&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=MedievalSharp&display=swap"></noscript>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- CSS加载失败回退脚本 -->
+    <script>
+        // 检查Bootstrap是否加载成功，失败时使用本地备份
+        function checkCSSLoaded() {
+            var links = document.querySelectorAll('link[rel="stylesheet"]');
+            links.forEach(function(link) {
+                if (link.sheet === null) {
+                    console.warn('CSS加载失败:', link.href);
+                    // 可以在这里添加本地备份的逻辑
+                }
+            });
+        }
+        
+        // 页面加载完成后检查
+        window.addEventListener('load', checkCSSLoaded);
+    </script>
 </head>
 <body>
-    <!-- 音频播放器 -->
-    <audio id="bgMusic" loop>
+    <!-- 音频播放器 - 延迟加载 -->
+    <audio id="bgMusic" loop preload="none">
         <source src="assets/audio/wow-background.mp3" type="audio/mpeg">
         您的浏览器不支持音频元素。
     </audio>
@@ -146,7 +180,28 @@ if (!file_exists($configFilePath)) {
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- JavaScript延迟加载 -->
+    <script>
+        // 延迟加载非关键JavaScript
+        function loadScript(src, callback) {
+            var script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = callback || function(){};
+            script.onerror = function() {
+                console.warn('脚本加载失败:', src);
+            };
+            document.head.appendChild(script);
+        }
+        
+        // 页面主要内容加载完成后再加载JavaScript
+        window.addEventListener('DOMContentLoaded', function() {
+            // 优先加载本地JS
+            loadScript('assets/js/main.js', function() {
+                // 本地JS加载完成后再加载Bootstrap
+                loadScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js');
+            });
+        });
+    </script>
 </body>
 </html>

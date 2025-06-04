@@ -1,0 +1,101 @@
+# 启用Gzip压缩
+<IfModule mod_deflate.c>
+    # 压缩文本、html、css、js、xml、json文件
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+    AddOutputFilterByType DEFLATE application/font-woff
+    AddOutputFilterByType DEFLATE application/font-woff2
+</IfModule>
+
+# 设置缓存头
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # CSS和JS文件缓存30天
+    ExpiresByType text/css "access plus 30 days"
+    ExpiresByType application/javascript "access plus 30 days"
+    ExpiresByType application/x-javascript "access plus 30 days"
+    
+    # 图片文件缓存7天
+    ExpiresByType image/jpg "access plus 7 days"
+    ExpiresByType image/jpeg "access plus 7 days"
+    ExpiresByType image/gif "access plus 7 days"
+    ExpiresByType image/png "access plus 7 days"
+    ExpiresByType image/webp "access plus 7 days"
+    ExpiresByType image/svg+xml "access plus 7 days"
+    
+    # 字体文件缓存30天
+    ExpiresByType font/woff "access plus 30 days"
+    ExpiresByType font/woff2 "access plus 30 days"
+    ExpiresByType application/font-woff "access plus 30 days"
+    ExpiresByType application/font-woff2 "access plus 30 days"
+    
+    # 音频文件缓存7天
+    ExpiresByType audio/mpeg "access plus 7 days"
+    ExpiresByType audio/mp3 "access plus 7 days"
+    
+    # HTML文件缓存1小时
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # PHP文件不缓存
+    ExpiresByType application/x-httpd-php "access plus 0 seconds"
+</IfModule>
+
+# 设置Cache-Control头
+<IfModule mod_headers.c>
+    # CSS、JS文件强缓存
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    # 图片文件缓存
+    <FilesMatch "\.(jpg|jpeg|gif|png|webp|svg)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    
+    # 字体文件缓存
+    <FilesMatch "\.(woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    # HTML文件短缓存
+    <FilesMatch "\.html$">
+        Header set Cache-Control "public, max-age=3600"
+    </FilesMatch>
+    
+    # PHP文件不缓存
+    <FilesMatch "\.php$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>
+
+# 启用ETag
+FileETag MTime Size
+
+# 安全头部（可选）
+<IfModule mod_headers.c>
+    # 防止MIME类型嗅探
+    Header always set X-Content-Type-Options nosniff
+    
+    # 防止XSS攻击
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # 防止点击劫持
+    Header always set X-Frame-Options SAMEORIGIN
+</IfModule>
+
+# 错误页面
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php 
